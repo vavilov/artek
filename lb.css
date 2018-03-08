@@ -1,0 +1,38 @@
+body{
+	background-image: url('assets/images/2343-20004-bl-1800x1171.jpg');
+	 background-attachment: fixed;
+	  background-size: cover;
+	  background-color: #a0232323;
+}
+
+.mbr-overlay {
+    background-color: #000;
+    bottom: 0;
+    left: 0;
+    opacity: .5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+#prev {
+    position: absolute;
+    left: 15px;
+    top: 45%;
+}
+
+#prev:active {
+    left: 8px;
+}
+
+#next {
+    position: absolute;
+    right: 15px;
+    top: 45%;
+    transform: scaleX(-1);
+}
+
+#next:active {
+    right: 8px;
+}

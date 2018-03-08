@@ -1,0 +1,28 @@
+.box {
+/*
+    width: 350px;
+    height: 125px;
+    display: block;
+*/
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+    margin: 15px;
+    /*background: red;*/
+   /* width: 640px;
+    height: 480px;*/
+}
+
+.buter {
+
+    width: 60%;
+}
+
+.bigtext{
+	color: black;
+	text-align: left;
+	margin-left: 80px;
+	margin-right: 80px;
+}

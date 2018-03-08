@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style-responsive.css" />
+    <link rel="stylesheet" href="bs.css">
+    <link rel="stylesheet" href="lb.css">
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+
+
+    <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+
+
+  <script>
+
+    var title = location.search.split('&')[0].substr(3);
+    var years = location.search.split('&')[1].substr(2);
+
+    var data;
+    var ret = $.getJSON( "data.json")
+      .fail(function(jqXHR, textStatus, errorThrown) { alert('getJSON request failed! ' + textStatus); })
+      .always(function() {
+        data = ret.responseJSON;
+        populateGallery( title, years );
+        count = data.count;
+      });
+
+      var current = 0;
+      var count = 0;
+      function showIt(type, data, title, num){
+        console.log(type, data, title, num);
+        current = num;
+
+        $( "#show_img" ).css("display", type==0?"block":"none");
+        $( "#show_vid" ).css("display", type==1?"block":"none");
+        $( "#show_text" ).css("display", type==2?"block":"none");
+
+        if(type==0) $( "#show_img" ).attr("src", data);
+        else if(type==1) {
+          $( "#show_vid" ).attr("src", data);
+          document.getElementById('show_vid').play();
+        }
+        else if(type==2) $( "#show_text" ).html(data);
+
+        document.getElementsByClassName("modal-title")[0].innerHTML = title;   
+      }
+
+      String.prototype.replaceAll = function(search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+      };
+
+    function prevnext(add){
+      current += add;
+      if(current<0) current = count - 1;
+      if(current>=count) current = 0;
+      var dt = data[current];
+      var dat = 'data/' + dt.data;
+      if(dt.type == 1) dat += ".png";
+      if(dt.type == 2) dat = dt.data.replaceAll('\n', '<br/>');
+      showIt(dt.type, dat, dt.title, current);
+    }
+
+    function populateGallery( fname, fyear ){
+      var ii = 0;
+      data.forEach(function(o){
+
+        fname = decodeURI( fname.toLowerCase().trim()) ;
+        fyear = fyear.toLowerCase().trim();
+        console.log( fname );
+        if(fname == "" || o.title.toLowerCase().includes(fname))
+          if(fyear == "" || o.year.toLowerCase().includes(fname)){
+
+            // here fuck whole blob
+            if(o.type=="0"){  // photo
+              //var tt = '<li>  <a href="#data-lightbox"><img src="%zzdata%" alt="Portfolio item" />    <div class="no-text">  <p>%zztitle%</p>    </div>  </a> </li>';
+              var tt = '<li>  <a onclick="showIt(0, &quot;data/' + o.data + '&quot;, &quot;' + o.title + '&quot;, '+ii+')"  data-toggle="modal" data-target="#exampleModalLong" data-title="' + 'data/' + o.data + '"><img src="' + 'data/' + o.data + '" alt="Portfolio item" />    <div class="no-text">  <p>%zztitle%</p>    </div>  </a> </li>';
+              tt = tt.replace('%zztitle%',o.title).replace('%zzdata%','data/' + o.data);
+              document.getElementById("artek_container").innerHTML += tt; 
+            }
+            else if(o.type=="1"){  // video
+              var tt = '<li>  <a onclick="showIt(1, &quot;data/' + o.data + '&quot;, &quot;' + o.title + '&quot;, '+ii+')"  data-title="' + 'data/' + o.data + '" data-toggle="modal" data-target="#exampleModalLong"><img src="' + 'data/' + o.data + '.png' + '" alt="Portfolio item" />    <div class="no-text">  <p>%zztitle%</p>    </div>  </a> </li>';
+              tt = tt.replace('%zztitle%',o.title).replace('%zzdata%','data/' + o.data);
+              document.getElementById("artek_container").innerHTML += tt;             
+            }
+            else if(o.type=="2"){  // text
+              var tt = '<li>  <a href="#data-lightbox" onclick="showIt(2, &quot;data/' + o.data.replaceAll('\n', '&lt;br/&gt;') + '&quot;, &quot;' + o.title + '&quot;, '+ii+')"  data-toggle="modal" data-target="#exampleModalLong"><img src="img/portfolio/bg.png" alt="Portfolio item" />    <div class="text">  <p>%zztitle%</p>    </div>  </a> </li>';
+              // <p class="description">%zzdata%</p>
+              tt = tt.replace('%zztitle%',o.title).replace('%zzdata%',o.data.substr(0, 100));
+              document.getElementById("artek_container").innerHTML += tt;       
+            
+            }
+            ii++;
+          }
+      })
+    }
+  </script>
+
+</head>
+
+<body>
+<section class="menu cid-qLl6oGbmYI" once="menu" id="menu1-4" data-rv-view="2005" style="margin: 64px;">
+  
+    <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm bg-color transparent">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <div class="menu-logo">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="index.html">
+                         <img src="assets/images/invert-308x228.png" alt="Mobirise" title="" media-simple="true" style="height: 3.8rem;">
+                    </a>
+                </span>
+                
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="page1.html"><span class="mbri-left mbr-iconfont mbr-iconfont-btn"></span>
+                        
+                        Назад</a>
+                </li></ul>
+            
+        </div>
+    </nav>
+</section>
+
+<div class="mbr-overlay"></div>
+    <div class="container2">
+
+        <!-- portoflio-->
+        <section class="portfolio" id="portfolio">
+<!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"> Launch demo modal</button>-->
+
+            <div class="portfolio-margin">
+
+                <!-- 1 item portoflio-->
+
+                <ul class="grid" id="artek_container">
+
+                   
+                </ul>
+            </div>
+        </section>
+        
+        
+        
+        
+        
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered  modal-lg" role="document" style="max-width: 90%; max-height: 90%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle" id="modal_titler"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="text-center" style="width: 100%">
+                            <img id="show_img" src="" alt="" style="max-height: 500px; margin: 0 auto; display: none">
+                            <video id="show_vid" autoplay muted loop controls controlsList="nodownload" src="" alt="" style="width: 100%; height:100%; max-height: 500px; display: none"></video>
+                            <p id="show_text" class="pre-scrollable bigtext" style="display: none; max-height: 500px; font-size: 16pt;"></p>
+                        </div>
+
+                        <div id="prev" onclick="prevnext(-1);"><img src="img/prev.png" alt=""></div>
+                        <div id="next" onclick="prevnext(1);"><img src="img/prev.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+        
+        
+        
+        
+        <div class="clear"></div>
+
+    </div>
+
+    <script>
+        $(function() {
+
+            var $container = $('.grid');
+
+            $container.imagesLoaded(function() {
+                $container.masonry({ itemSelector: 'li'  });
+                setInterval(function() { 
+                $container.masonry({ itemSelector: 'li'  });}
+                , 1000);
+                               
+            });
+
+        });
+
+    </script>
+    <script src="js/script.js"></script>
+
+    <script src="popper.min.js" crossorigin="anonymous"></script>
+    <script src="bs.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

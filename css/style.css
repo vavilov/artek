@@ -1,0 +1,226 @@
+/* Font Google - strong reaload time */
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,300,100,700,900&subset=latin,latin-ext);
+
+
+/*
+ * Author: Alexey Parshin
+ * Created: 15/12/2016
+ */
+
+.preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 99999;
+}
+
+.preloader .item {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+
+html,
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    -webkit-font-smoothing: subpixel-antialiased!important;
+    color: black;
+    font-weight: 400;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 64px;
+    color: white;
+    font-weight: 400;
+    /* text-transform:uppercase; */
+    letter-spacing: 6px;
+    line-height: 1.2;
+}
+
+p {
+    font-size: 14px;
+    color: white;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-top: 40px;
+}
+
+
+h1 span {
+    color: #2fa68e;
+}
+
+
+::selection {
+    background: #ada074;
+    color: white;
+}
+
+::-moz-selection {
+    background: #ada074;
+    color: white;
+}
+
+
+.container2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Portfolio */
+
+.portfolio {
+    position: relative;
+    width: 100%;
+    z-index: 10;
+
+}
+
+.portfolio .portfolio-margin {
+    position: relative;
+    width: 1000px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.portfolio .portfolio-margin .read-more {
+    width: 183px;
+    height: 47px;
+    position: relative;
+    margin: 50px auto 100px;
+    line-height: 47px;
+    border: 1px solid #333333;
+    text-transform: uppercase;
+    text-align: center;
+    color: #333333;
+    cursor: pointer;
+    font-size: 14px;
+    background: none;
+    -webkit-transition: all 0.6s ease-in;
+    -moz-transition: all 0.6s ease-in;
+    -ms-transition: all 0.6s ease-in;
+    -o-transition: all 0.6s ease-in;
+    transition: all 0.6s ease-in;
+    letter-spacing: 1px;
+}
+
+.portfolio .portfolio-margin .read-more:hover {
+    background: #ada074;
+    color: white;
+    border: 1px solid #ada074;
+}
+
+.portfolio .portfolio-margin h1 {
+    font-size: 34px;
+    color: black;
+    text-align: center;
+    margin-top: 120px;
+    letter-spacing: 6px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.portfolio .portfolio-margin hr {
+    color: black;
+    margin-top: 30px;
+    background-color: black;
+    height: 1px;
+    width: 106px;
+    border: 0;
+}
+
+
+
+
+/* Portfolio grid */
+
+.grid {
+    margin-top: 70px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 70px;
+    overflow: hidden;
+}
+
+.grid li {
+    width: 285px;
+    margin: 0 15px 15px 0;
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.grid img {
+    width: 285px;
+    float: left;
+    position: relative;
+}
+
+.grid .text {
+    position: absolute;
+    width: 285px;
+    height: 100%;
+/*    height: 346px;*/
+    background: rgba(173, 160, 116, 1);
+}
+
+.grid .no-text {
+    position: absolute;
+    width: 285px;
+    height: 100%;
+    background: rgba(173, 160, 116, 0.5);
+    z-index: 2;
+    opacity: 0;
+    -webkit-transition: all 0.6s ease-in;
+    -moz-transition: all 0.6s ease-in;
+    -ms-transition: all 0.6s ease-in;
+    -o-transition: all 0.6s ease-in;
+    transition: all 0.6s ease-in;
+}
+
+.grid .no-text:hover {
+    opacity: 1;
+}
+
+.grid p {
+    font-size: 18px;
+    text-align: center;
+    line-height: 26px;
+    margin-top: 40px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #FFF;
+}
+
+.grid p.description {
+    font-size: 12px;
+    width: 300px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: #FFF;
+    position: relative;
+}
+
+.clear {
+    clear: both;
+}
